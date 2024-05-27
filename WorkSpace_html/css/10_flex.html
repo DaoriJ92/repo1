@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .flex-container {
+            border: 1px solid green;
+            width: auto;
+            height: 500px;
+
+            
+            display:flex; 
+            /* 자식요소에 flex를 적용 하면서 부모요소는 block적용 */
+            /* display: inline-flex;  */
+            /* 자식요소엔 flex를 부모요소엔 inline-block을 적용  */
+            /* 해당 값만 입력시 자식요소를 inline-block으로 만들어 가로정렬 하되, 높이는 부모요소와 동일 */
+            
+            /* 
+            flex-direction: flex 컨테이너의 정렬(주축) 방향을 설정
+            flex-direction: row;  좌에서 우로 수평 배치 : 따로 입력하지 않아도 적용되는 기본 값
+            flex-direction: reverse; 우에서 좌로 수평 배치 : 우에서 좌로 수평 배치
+            flex-direction: column; 위에서 아래로 수직 배치
+            flex-direction: column-reverse; 아래에서 위로 수직 배치
+            */
+            flex-wrap: nowrap;
+            /* 
+            flex-wrap: flex 컨테이너의 복수 item을 1행으로 또는 복수행으로 배치, 컨테이너의 넓이보다 아이템들의 넓이가 넓을 경우 한 줄, 복수 행으로 표시할지 지정.
+            기본값은 flex:wrap: nowrap; 이며 한줄에 모든 아이템을 배치하며 컨테이너 넓이보다 넓을경우 축소하여 표시 되나 overflow:auto 혹은 scroll 을 입력할시 스크롤 생성
+            
+            flex-wrap: wrap; 넘치는 경우 다음 줄에 표시.
+            */
+            /* overflow: auto; */
+            /*
+             flex-flow: 는 위 기술한 diretion과 wrap 속성을 모두 설정하기 위한 단축 명령, 기본값은 row, norwap 
+            flex-flow: <flex-direction> || <flex-wrap>;
+             */
+
+            /* justify-content: flex-start;   */
+            /* 기본 값, flex container의 main axis를 기준으로 flex item을 수평 정렬한다. */
+            /* justify-content: flex-end;  */
+            /* main축의 end 방향으로 정렬 */
+            /* justify-content: center;  */
+            /* 가운데로 정렬 */
+            /* justify-content: space-between;  */
+            /* 첫번째와 마지막 아이템을 각각 컨테이너의 처음과 끝 부분에 배치한 후 남은공간에 여백과 컨텐츠를 균등 분배하여 정렬 */
+            /* justify-content: space-around;  */
+            /* 기본적으로 between과 동일하나 주변에 여백을 배치하여 양쪽 끝 아이템보다 중간에 위치하는 아이템의 여백이 넓음 */
+            /* justify-evenly:space-evenly  */
+            /* around 값이 중복되는 부분이 있어 중간 아이템의 여백이 넓다면 evenly는 모두 균등하게 주변 여백을 준다. */
+
+
+            /* align-items:  flex item을 flex container의 수직 방향(cross axis)으로 정렬
+            모든 flex item에 적용.- 한줄에 대한 cross축. */
+            /* align-items: stretch;  */
+            /*기본값이며, 모든 아이템은 컨테이너의 높이(축의 중심에 따라 수직, 수평)에 꽉 찬 높이를 가짐 */
+            /* align-items: flex-start;  */
+            /* 모든 flex item은 flex container의 cross start(축의 시작방향)의 기준으로 정렬 */
+            /* align-items: flex-end;  */
+            /* 모든 flex item은 flex container의 cross end(축의 끝방향)의 기준으로 정렬 */
+            /* align-items: center;  */
+            /* 모든 flex item은 flex container의 cross axis의 중앙에 정렬- 축이 틀어지면 틀어진 죽의 중앙에 정렬 */
+            /* align-items: baseline;  */
+            /* 모든 flex item은 flex container의 baseline을 기준으로 정렬, 잘 사용하지 않음 */
+
+            /* 
+            align-content: 기본적으로 align-items과 동일하나 여러 줄에 대한 cross축에 적용.
+            align-content: stretch; 기본값, 각 줄의 높이를 꽉 채워 정렬 
+            */
+            /* align-content: flex-start; */
+            /* align-content: flex-end; */
+            /* align-content: center; */
+            /* align-content: space-between; */
+            /* align-content: space-around; */
+            /* align-content: space-evenly; */
+            /* float, clear, vertical-align 속성은 flex item에 영향을 주지 않는다. */
+        }
+
+
+        .flex-container .flex-item {
+            border: 1px solid red;
+            background-color: brown;
+            color: white;
+            /* width: 100px; */
+            flex-basis: 100px;
+            /* flex를 이용 할시 width 대신 사용하며 기본 값(%,px)을 적용
+            기본값은 0 1 auto */
+            /* flex: grow,shrink, basis 속성의 단축명령어, 기본값은 0 1 auto
+            전체적으로 사용하기보단 개별적 기술을 추천 */
+        }
+        .flex-item 
+    </style>
+</head>
+
+<body>
+    <div class="flex-container">
+        <!-- order: flex item의 배치 순서를 지정한다. 
+        HTML 코드를 변경하지 않고 order 속성값을 지정하는 것으로 간단히 재배치할 수 있다.
+        기본 배치 순서는 flex container에 추가된 순서이다. 기본값은 0 이며 음수도 가능. 값이 작을수록 우선배치 
+        *중요* display:flex; 에서만 작동
+        -->
+        <div class="flex-item" style="align-self: flex-start;">1</div>
+        <div class="flex-item" style="order:-1;">2</div>
+        <div class="flex-item" style="order:-10">3</div>
+        <!-- flex-grow: 기본값 0
+            남은 공간을 꽉 채우는 기술, 뒤에 정수값은 분배 비율
+            모든 여백을 분배함
+         -->
+         <!-- flex-shrink:  기본값 1
+            아이템의 줄어들 공간에 대한 비율을 적용 하는 기술
+            grow와 같이 적용 가능
+            값이 클 수록 많이 줄어 듦
+            축소 되지 않을 경우 작동 하지 않음
+            grow로 여백을 없앤 후 각 item의 비율을 조정할때 사용하기 좋음.
+          -->
+        <div class="flex-item" style="flex-grow: 2; flex-shrink: 4;">4</div>
+        <div class="flex-item" style="flex-grow: 4; flex-shrink: 2;">5</div>
+    </div>
+    바깥 글씨
+</body>
+
+</html>

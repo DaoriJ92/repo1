@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            text-align: center;
+            margin: auto;
+            width: 50%;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" method="get">
+        <label for="button">button :</label>
+        <input type="button" id="button" value="까꿍"><br>
+        
+        <label for="checkbox1">checkbox :</label>
+        <input type="checkbox" id="checkbox1" value="1"> <label for="checkbox1">김밥</label>
+        <input type="checkbox" id="checkbox2" value="2"> <label for="checkbox2">라면</label><br>
+        
+        <label for="color">color :</label>
+        <input type="color" id="color"> <br>
+        
+        <label for="date">date :</label>
+        <input type="date" id="date"><br>
+        
+        <label for="file">file :</label>
+        <input type="file" id="file"> <br>
+        
+        <input type="hidden" value="">
+        
+        <label for="number">number :</label>
+        <input type="number" id="number"><br>
+        
+        <label for="password">password :</label>
+        <input type="password" id="password" placeholder="비밀번호"><br>
+        
+        <label>radio :</label>
+        <input type="radio" id="male" name="gender" value="male"> <label for="male">남자</label>
+        <input type="radio" id="female" name="gender" value="female"> <label for="female">여자</label>
+        <input type="radio" id="unknown" name="gender" value="unknown"> <label for="unknown">비공개</label><br>
+        
+        <label for="text">text :</label>
+        <input type="text" id="text"> <br>
+        
+        <input type="reset" value="지워줘">
+        <input type="submit" value="전송">
+    </form>
+    
+    <hr>
+    
+    <form action="https://search.naver.com/search.naver" method="get" target="_blank">
+        <input type="text" name="query" placeholder="검색어 입력란">
+        <input type="submit" value="네이버 검색">
+    </form>
+    
+    <form action="https://www.google.com/search" method="get" target="_blank">
+        <input type="text" name="query">
+        <input type="submit" value="구글 검색">
+    </form>
+    
+    <hr>
+    
+    <form>
+        <select>
+            <option value="-" selected="selected">-</option>
+            <option value="한식">한식</option>
+            <option value="양식">양식</option>
+            <option value="중식">중식</option>
+            <option value="일식">일식</option>
+            <option value="매운거">매운거</option>
+            <option value="안 매운거" disabled="disabled">안 매운거</option>
+            <option value="빵">빵</option>
+            <option value="밥">밥</option>
+            <option value="면">면</option>
+            <option value="떡">떡</option>
+            <option value="뜨거운 거">뜨거운 거</option>
+            <option value="차가운 거">차가운 거</option>
+        </select>
+        <input type="submit" value="결정">
+    </form>
+    
+    <hr>
+    
+    <form>
+        <textarea name="write_here" rows="10" cols="30"></textarea>
+        <input type="submit" value="제출">
+    </form>
+
+    <form>
+        <textarea name="write_here" rows="10" cols="30" readonly="readonly">메롱</textarea>
+        <input type="submit" value="제출">
+    </form>
+</body>
+
+</html>

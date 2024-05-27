@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        text-align: center;
+        margin: 30px
+    }
+
+    .flex-container {
+        border: 1px solid red;
+        width: 100%;
+
+        margin-top: 100px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+    }
+
+    .flex-item {
+        /* border: 1px solid blue; */
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        margin-top: 10px;
+        width: 100%;
+
+    }
+
+
+
+    .search_box>button {
+        /* border:1px solid green; */
+
+        background-color: #03c75a;
+        color: white;
+
+    }
+
+    .select_box {
+        display: flex;
+        box-sizing: border-box;
+    }
+
+    .select_box select {
+        width: 90px;
+        height: 21px;
+        box-sizing: border-box;
+        display: flex;
+
+    }
+    .table {
+        display: inline-block;
+        border: 1px solid green;
+        width: 90%;
+        height: auto;
+        text-align: center;
+    
+    }
+    .allselect{
+        text-align: left;
+    }
+    .tb_title {
+        width:40%;
+    }
+    .tb_name {
+        width:20%;
+    }
+    .tb_date, .tb_view, .tb_like {
+        width:10%;
+    }
+</style>
+
+<body>
+    <div class="flex-container">
+
+        <div class="flex-item_1">
+            <!-- <table>
+                <tr>
+                    <td>
+                        <textarea cols="30"></textarea>
+                    </td>
+                    <td>
+                        <input type="submit" value="검색" >
+                    </td> 
+                </tr>
+            </table> -->
+            <!-- <textarea  rows="" cols="30"></textarea>
+            <input type="submit" value="검색" background-color="lightgreen";> -->
+            <form class="search_box">
+                <!-- <textarea cols="30"></textarea>           -->
+                <input type="text">
+                <button type="button" value="검색">검색</button>
+            </form>
+        </div>
+        <div class="flex-item">
+            게시판 분석
+        </div>
+        <div class="flex-item">
+            새글 구독 <input type="checkbox">
+            <input type="checkbox">공지 숨기기
+            <form class="select_box">
+                <select style="
+                padding-top:3px;">
+                    <option>
+                        5개씩
+                    </option>
+                    <option>
+                        10개씩
+                    </option>
+                    <option>
+                        15개씩
+                    </option>
+                    <option>
+                        20개씩
+                    </option>
+                </select>
+            </form>
+        </div>
+        
+        <hr>
+    </div>
+    
+    <div class="table">
+        <table >
+            <tr>
+                <td class="tb_checkbox"></td>
+                <td class="tb_title">제목</td>
+                <td class="tb_name">작성자</td>
+                <td class="tb_date">작성일</td>
+                <td class="tb_view">조회</td>
+                <td class="tb_like">좋아요</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td class="allselect">전체선택</td>
+                <td></td>
+                <td>이동</td>
+                <td>삭제</td>
+                <td>글쓰기</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

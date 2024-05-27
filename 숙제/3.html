@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* HTML 요소에 대한 기본 스타일 */
+        html {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        body {
+            /* border: 1px solid pink; */
+            background-color: rgb(51, 51, 51);
+            margin: 30px;
+            box-sizing: border-box;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* 요소들을 수직으로 가운데 정렬합니다 */
+        }
+
+        /* 상단 정보 스타일 */
+        .flex-top {
+            /* border: 1px solid red; */
+            width: 100%;
+            height: 20px;
+
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            /* 요소들을 좌우 끝 균등분배 */
+            margin-bottom: 20px;
+            /* 간격 조정 */
+            /* flex-top과 flex-title 사이에 공간을 추가 */
+        }
+
+        /* 섹션 제목 스타일 */
+        .flex-title {
+            /* border: 1px solid green; */
+            width: 70%;
+            margin-bottom: 20px;
+            /* 간격 조정 */
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            /* 내부 콘텐츠를 수직 가운데 정렬 */
+            justify-content: flex-start;
+            /* 수평 시작점 정렬 */
+        }
+
+        /* 프로젝트 배경 및 목표 설명 스타일 */
+        .flex-subtitle {
+            display: flex;
+            width: 70%;
+            align-items: top;
+            /* 내부 콘텐츠를 수직 가운데 정렬 */
+            justify-content: space-between;
+            /* 요소들을 좌우 끝 균등분배 */
+            color: white;
+            margin-bottom: 20px;
+            /* 간격 조정 */
+        }
+
+        /* 왼쪽 및 오른쪽 항목 스타일 */
+        .item-L,
+        .item-R {
+            width: 40%;
+            /* 너비 조정 */
+            font-size: 10px;
+        }
+
+
+        .flex-container {
+            width: 70%;
+            margin-bottom: 20px;
+            /* 간격 조정 */
+            color: white;
+        }
+
+
+        .flex-title input {
+            width: 50px;
+            /* input 요소의 너비를 조정 */
+            background-color: rgb(51, 51, 51);
+            /* 굳이 설정 할 필요 없으나
+            혹시 몰라 입력
+            input 요소의 배경색을 body와 동일하게 설정 */
+            border: 1px solid blue;
+            /* input 요소의 테두리를 파란색으로 설정 */
+            font-size: 0;
+            /* 박스를 줄 처럼 보이게 하기 위해 input의 글씨 크기를 0으로 설정 */
+            box-sizing: border-box;
+
+            margin-right: 10px;
+            /* input 요소와 "OVERVIEW" 텍스트 사이에 공간 확보 */
+
+        }
+
+        /* 내비게이션 요소 정렬을 위한 스타일 */
+        .flex-container {
+            /* border: 1px solid rosybrown; */
+            width: 100%;
+            height: auto;
+            flex-wrap: wrap;
+            /* display: flex; */
+
+            align-items: stretch;
+
+            /* 요소들을 좌우 끝에 배치 */
+            margin-bottom: 10px;
+            /* 아래 요소와의 간격 조정 */
+        }
+
+        .container {
+            width: 100%;
+            /* margin: 0 14px 0 14px; */
+        }
+
+        .contant {
+            background-color: #212121;
+            /* border: 1px solid yellow; */
+            width: 70%;
+            height: 100%;
+            /* display: flex; */
+            padding: 50px;
+
+
+        }
+
+        .fl1 {
+            float: left;
+            /* border: 1px solid blue; */
+            width: auto;
+            padding: 5px;
+        }
+
+        .fr1,
+        .fr2 {
+            float: right;
+            /* border: 1px solid blue; */
+            width: auto;
+            padding: 5px;
+        }
+
+        .nav {
+            /* border: 1px solid red; */
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .nav>.left,
+        .nav>.right {
+            display: flex;
+        }
+
+        .MARS {
+            width: 100%;
+        }
+
+        .nav>.left nav,
+        .nav>.right nav {
+            padding: 5px;
+            border: 1px solid white;
+            text-align: center;
+        }
+
+        .left nav {
+            width: 70px;
+        }
+
+        .right nav {
+            width: 107px;
+        }
+
+        /* .nav>.left {
+            border: 1px solid white;
+            display: flex;
+        }
+
+        각각 적용 하였으나 실패
+        
+
+        .nav>.right {
+            border: 1px solid white;
+            display: flex;
+        }
+         */
+        .container>.img {
+            border: 1px solid red;
+            width: 100%;
+            height: 500px;
+            background-image: url('https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2015/12/MarsScreenshot3-1021x580.jpg');
+            background-size: cover;
+
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+            padding-top: 100px;
+        }
+
+        .B1 {
+            background-color: blue;
+            color: white;
+            font-weight: bold;
+
+            width: 180px;
+            height: 50px;
+            margin-top: 50px;
+
+        }
+
+        .SPACESHIPS {
+            width: 100%;
+        }
+
+
+
+        /* 테이블 스타일 */
+
+        .MARS {
+            width: 100%;
+            /* 테이블의 너비를 100%로 설정하여 가로 스크롤이 나타나지 않도록 함 */
+            color: white;
+        }
+
+        td.img {
+            width: 100%;
+            height: 500px;
+            background-image: url('https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2015/12/MarsScreenshot3-1021x580.jpg');
+            background-size: cover;
+
+            color: white;
+            font-size: 70px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+
+
+        .space {
+            width: 100%;
+            /* 테이블의 너비를 100%로 설정하여 가로 스크롤이 나타나지 않도록 함 */
+            color: white;
+            /* 테이블 텍스트의 색상을 흰색으로 설정 */
+            margin-top: 50px;
+            /* 테이블 상단 여백부여 */
+        }
+
+
+        td,
+        th {
+            border: 1px solid white;
+            /* 테이블 셀의 테두리를 흰색으로 설정 */
+            padding: 8px;
+            /* 테이블 셀의 내부 여백을 추가하여 텍스트와 테두리 사이의 공간을 확보 */
+            text-align: center;
+            /* 테이블 셀의 텍스트를 가운데 정렬 */
+        }
+
+        td.img2 {
+            width: 100%;
+            height: 400px;
+            background-image: url('https://cdn.huffingtonpost.kr/news/photo/201507/9085_16457.jpeg');
+            background-size: cover;
+
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+            padding-top: 100px;
+        }
+        .ships{
+            width:100%;
+            margin-top: 50px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .clearfix::after {
+            /*  
+            부모에게 after를 이용해서 자식들의 float 정보를 초기화, float 이용하여 작업도중 실패-
+                        */
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .hr {
+            width: 100%;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-top">
+        <div class="flex-top-1">UI/UX DESIGN</div>
+        <div class="flex-top-2">SPACE TRAVEL COMPANY</div>
+        <div class="flex-top-3">2021</div>
+    </div>
+    <div class="flex-title">
+        <input type="text">
+        PROJECT OVERVIEW
+    </div>
+    <div class="flex-subtitle">
+        <div class="item-L">
+            <h1>BACKGROUND</h1><br>
+            Sphere is a space travel company offering trips to earth Orbit, Space station, Moon and Mars. Sphere is
+            looking th sell tickets to space by fostering public interest and increasing transparency in space tourism.
+        </div>
+        <div class="item-R">
+            <h1>OBJECTIVES</h1><br>
+            Design a responsive space tourism website that not only informs the user of the mission and astronaut
+            process. but also is visually captivating and futuristic.
+        </div>
+    </div>
+    <div class="flex-title">
+        <input type="text">
+        MAIN PAGE
+    </div>
+    <div class="contant">
+        <div class="flex-container">
+            <div class="container">
+                <div class="fl1">SPHERE</div>
+                <div class="fr1">ABOUT</div>
+                <div class="fr2">CONTACT</div>
+            </div>
+
+            <div class="nav">
+                <div class="left">
+                    <nav class="l1">BOOK</nav>
+                    <nav class="l2">FLIGHTS</nav>
+                    <nav class="l3">SHIPS</nav>
+                    <nav class="l4">TRANING</nav>
+                    <nav class="l5">NEWS</nav>
+                </div>
+                <div class="right">
+                    <nav class="r1">SEARCH</nav>
+                    <nav class="r2">LANGUEGE</nav>
+                </div>
+            </div>
+            <div>
+                <table class="MARS">
+                    <tr>
+                        <td class="img">
+                            TO SPACE <BR>
+                            AND BACK, SAFELY
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <table border="1" class="space">
+                <tr>
+                    <td>EARTH</td>
+                    <td>SPACE STATION</td>
+                    <td>MOON</td>
+                    <td>MARS</td>
+                    <td>ALL FLIGHTS</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="img2">
+                        AVAILABLE FLIGHTS<BR>
+                        <H1>SPACE STATION</H1>
+                        TRANSPORTING HUMANS TO THE ORBITING<br>
+                        LABORATORY IN THE SKY <br>
+                        <button CLASS="B1">
+                            EXPLORE
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="SPACESHIPS">
+            <table border="1" class="ships">
+                <tr>
+                    <td colspan="3">
+                        SPACESHIPS
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        01
+                    </td>
+                    <td>
+                        DRAGON
+                    </td>
+                    <td>
+                        X
+                    </td>
+                </tr>
+                <tr>
+                    <Td colspan="3">
+                        이미지1
+                    </Td>
+                </tr>
+                <tr>
+                    <td>
+                        정보
+                    </td>
+                    <td>
+                        이미지2
+                    </td>
+                    <td>
+                        이미지3
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        02
+                    </td>
+                    <td>
+                        FALCON 9
+                    </td>
+                    <td>
+                        +
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        03
+                    </td>
+                    <td>
+                        FALCON 9
+                    </td>
+                    <td>
+                        +
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+    </div>
+</body>
+
+</html>
