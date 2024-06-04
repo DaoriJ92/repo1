@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //15와 20이 주어졌을때
+        // 세번째 값 17이 그 사이에 있는지 확인
+        let x = 15;
+        let y = 20;
+        let z = 17;
+
+        // let z = prompt ("값 입력"); z값을 선언 하지 않고 입력하게 만듦
+        if ( x <= z <= y ){
+            console.log(' 17은 15와 20 사이에 있다.')}
+        else{ console.log('17은 15와 20 사이에 없다.') }
+        
+        /*  온도를 입력받는다.
+            입력받은 온도에 따라서
+        1.  '영상입니다', '영하입니다' 표시
+            ex) -3을 입력 할 경우 영하 3도입니다. 표시.
+        2.  이전에 입력 받은 값을 어제 기온이라 가정하고
+            이번에 입력 받은 온도를 이용해서
+            온도차이를 표시
+            ex) '어제보다 5도 높습니다'
+                 
+        */ 
+        // let a = prompt ('온도 입력')
+        a = Number(a); // 문자이므로 값으로 숫자로 변경
+        if ( a <= 0 ) {
+            console.log('영하 '+ (-a) +' 도 입니다.')}// 출력시 -를 빼고 출력
+        else {
+            console.log('영상 ' + a + ' 도 입니다.')}
+       
+        // let b = prompt ('오늘 온도 입력')
+        b = Number(b);
+        if ( a < b ) {
+            console.log('어제보다 ' + Math.abs( b - a ) + ' 도 높습니다.')
+        }else if ( a > b ) {
+            console.log('어제보다 ' + Math.abs( a - b ) + ' 도 낮습니다.')
+        }else if ( a = b ) {
+            console.log('어제와 기온이 같습니다.')};
+        
+        
+    /*  3.  두 수를 입력 받고(or하드코딩 하고)
+            c와 d에 저장 해 놓고
+            둘 중 큰 값 출력
+    */   
+    
+        // let c = prompt ('값 입력');
+        // let d = prompt ( '비교값 입력')
+        c = Number(c);
+        d = Number(d);
+        if ( c < d ) {
+            console.log(d)}
+        else if( c > d ){ 
+            console.log(c)}
+        else {console.log('같다.');}
+
+       
+    //  4.  입력 받은 값이 10의 자리와 1의 자리가 같은지 판단. 
+
+        let num = prompt ('값 입력')
+        let num10 = num / 10;
+        num10 = parseInt(num10);
+        console.log('num10 : ' + num10);
+        num1 = num % 10;
+        console.log('nim1 : ' + num1);
+        if(num10 == num1){
+            console.log('같음');
+        }else{
+            console.log('다름');
+        }
+        
+
+        //좌 상단 좌표
+        let x1 = 10;
+        let y1 = 20;
+        //우 하단 좌표
+        let x2 = 90;
+        let y2 = 100;
+        
+        let x3 = 50,
+            y3 = 50;
+
+            if (
+                (x1 <= x3 && x3 <= x2)
+            &&
+                (y1 <= y3 && y3 <= y2))
+            {
+                console.log('x3, y3은 안에 있다.')}
+            else{
+                console.log('x3, y3은 밖에 있다.')};
+
+            
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

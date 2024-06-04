@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script>
+      //  let i=0;
+      //  let j=0;
+      let i = 0, j = 0;
+      // 'i++'가 아닌 '1++'로 작성되어 잘못된 문법입니다. 고쳐야 합니다.
+      for (let i = 0, j = 10; i < 3; i++, j -= 2) {
+         console.log(i)
+      }
+
+      let arr = [10, 20, 30]
+      console.log('옛날 for문');
+      // 'i++'가 아닌 '1++'로 작성되어 잘못된 문법입니다. 고쳐야 합니다.
+      for (let i = 0; i < arr.length; i++) {
+         console.log(arr[i])
+      }
+      console.log('for in')
+      // 'arr[i]'에서 '.' 대신 ','가 사용되어 잘못된 문법입니다. 고쳐야 합니다.
+      for (let i in arr) {
+         console.log('i : ', i, ', arr : ', arr[i])
+      }
+      //  java 에서 향상된 for문
+      for (let i of arr) {
+         console.log('i : ', i);
+      }
+
+      //   1. 1~10까지 짝수만 출력하기   
+      //    증감식 이용하기
+      console.log('증감식 이용하기');
+      for (let i = 2; i <= 10; i += 2) {
+         console.log(i);
+         console.log('-------------------')
+      }
+      //       if문 이용하기
+      for (let i = 1; i <= 10; i++) {
+         if (i % 2 == 1) {
+            continue;
+         } else {
+            console.log(i);
+         }
+      }
+
+      //    2. 1~10까지 한줄에 3개씩 출력되게
+      //       1 2 3
+      //       4 5 6
+      //       7 8 9
+      //       10
+      let result = '';
+
+      for (let i = 1; i <= 10; i++) {
+         result += i + ", ";
+         //3번마다
+         //즉 i가 3의 배수일때 마다
+         if (i % 3 == 0) {
+            // console.log(resulconsole.log('');t);
+            // result = ''; 
+            result += '\n'
+         }
+         //10 출력되지 않음
+         //이유 : 10은 3의 배수가 아니여서
+         //방안
+         //남은 개수가 3개보다 적은 경우 그냥 이어서 출력
+      }
+      console.log(result);
+
+      /*
+      .....
+      +....
+      ++...
+      +++..
+      ++++.
+      +++++
+      */
+
+      let line = 5;
+
+      for (let j = 1; j <= 5; j++) {
+         let result = '+';
+         for (let j = 1; j <= 4; j++) {
+            result += '.';
+         }
+         console.log(result);
+      }
+
+      for (let j = 2; j <= 5; j++) {
+         let result = '+';
+         for (let j = 1; j <= 3; j++) {
+            result += '.';
+         }
+         console.log(result);
+      }
+
+      for (let i = 1; i <= line; i++) {
+         let result = '';
+         for (let j = 1; j <= i; j++) {
+            result += '+';
+         }
+         for (let j = 1; j <= line - i; j++) {
+            result += '.';
+         }
+         console.log(result);
+      }
+
+
+      console.log('------구구단 한단씩 옆으로------')
+
+      //2x1=2 2x2=4....2x9=18
+
+      // result = '';
+      // for (let i = 1; i <= 9; i++)
+      //    result += '2x' + i + '=' + (2 * i) + "\t";
+      // console.log(result);
+      
+      // result = '';
+      // for (let i = 1; i <= 9; i++)
+      //    result += '3x' + i + '=' + (3 * i) + "\t";
+      // console.log(result);
+
+
+      for(let j=2; j<=9; j++){
+         result='';
+         for(let i=1; 1<=9; i++){
+            result += 'jx' + i + '=' + (j * i) + "\t";
+         }
+      }
+      console.log(result);
+
+
+
+
+   </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
