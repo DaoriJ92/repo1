@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .block {
+            width:200px;
+            border:2px solid red;
+            margin: 0 auto;
+        }
+        .bg_blue {
+            background-color: blue;
+            color: white;
+        }
+
+        .parents > div {
+            border:1px dotted rgb(0,0,255);
+            width: 400px;
+            height: 200px;
+            /* inline에 block의 장점인 부피감을 더한 것 */
+            display: inline-block;
+            /* inline, inline-block에만 적용 됨 */
+            vertical-align:top;
+
+        }
+
+    </style>
+</head>
+<body>
+    <p class="block">첫번째 p</p>
+    <p class="block">두번째 p</p>
+<br>
+    <span class="bg_blue">첫번째 span</span><span class="bg_blue">두번째 span</span>
+    <hr>
+
+    <div class="parents">
+        <div>목록1</div>
+        <div>목록2</div>
+    </div>
+
+    <div class="parents"
+    
+</body>
+</html>
