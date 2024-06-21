@@ -78,20 +78,42 @@
         [type="checkbox"]:checked + span {
             text-decoration: line-through;
         }
-      
+
+        .text {
+            border: 1px solid red;
+            width: 200px;
+        }
         .text.nowrap {
+            /* 
+                inline 요소를 자동 줄바꿈하지 않는다 
+                케러셀 등에서 쓰인다
+            */
             white-space: nowrap;
+
+            /*
+                text-overflow 사용하려면 overflow: hidden이 필요하다
+                overflow로 가려진 글씨가 있을때
+                ...을 붙여준다
+            */
             text-overflow: ellipsis;
             overflow: hidden;
         }
-        /* 원래 한 단 어로 인식하는 경우 넘쳐도 자동 줄 바꿈이 되지않으나 
-        break-word 적용시 너비를 벗어나지 않게 자동 줄 바꿈 해줌 */
+
         .word-wrap {
-            word-wrap: break-word
+            /*
+                원래 한 단어로 인식하는 경우 넘쳐도 자동 줄바꿈이 되지 않음
+                break-word 적용시 너비를 벗어나지 않게 자동 줄바꿈 해줌
+                원래 자동 줄바꿈 되는게 유지됨
+            */
+            word-wrap: break-word;
         }
-        /*  */
+
         .word-break {
-            word-break: break-all
+            /* 
+                word-wrap: break-word랑 비슷한데 
+                원래 자동 줄바꿈 대상을 무시한다
+            */
+            word-break: break-all;
         }
     </style>
 </head>
@@ -134,17 +156,21 @@
         <input type="checkbox"> <span>복습</span><br>
         <input type="checkbox"> <span>겜한판</span><br>
     </div>
+
     <div class="text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae laborum numquam distinctio eos commodi enim ipsum? Molestiae repudiandae a culpa minus cumque facilis ad reiciendis omnis delectus dolore, repellat quis.
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem hic voluptatibus nemo, veritatis obcaecati aspernatur iure vel nostrum. Eveniet delectus possimus ipsum neque veritatis id, est nobis ut atque reiciendis!
     </div>
-    <div class="text nowrap">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis error earum vel inventore deserunt, harum vitae, neque corrupti assumenda, in ipsa voluptates quo dolorum fugit ipsum velit mollitia alias incidunt!
+    <div class="text nowrap" title="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem hic voluptatibus nemo, veritatis obcaecati aspernatur iure vel nostrum. Eveniet delectus possimus ipsum neque veritatis id, est nobis ut atque reiciendis!">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem hic voluptatibus nemo, veritatis obcaecati aspernatur iure vel nostrum. Eveniet delectus possimus ipsum neque veritatis id, est nobis ut atque reiciendis!
     </div>
-    <div class="wordwrap">
-        asdasdasdsadsadasdasdasdsadasdasdasdsadsadasdqwdsadas
+    <div class="text">
+        wefwefohwefoiwhefoihwefoiwefoihwefoiasdf wefoihwefoihwfeoihwefasdfouhwefoihwef
     </div>
-    <div class="wordwrap">
-        asdasdasdsadsadasdasdasdsadasdasdasdsadsadasdqwdsadas
+    <div class="text word-wrap">
+        wefwefohwefoiwhefoihwefoiwefoihwefoiasdf wefoihwefoihwfeoihwefasdfouhwefoihwef
+    </div>
+    <div class="text word-break">
+        wefwefohwefoiwhefoihwefoiwefoihwefoiasdf wefoihwefoihwfeoihwefasdfouhwefoihwef
     </div>
 </body>
 </html>

@@ -1,21 +1,20 @@
 body {
     margin: 0px;
 }
-
 div.first {
     /* border: 20px solid red; */
     border-top: 5px solid red;
     border-right: 10px solid #0000ff;
     border-bottom: 15px solid #00ff00;
-    border-left: 15px solid rgba(255, 0, 0, 0.5);
-
+    border-left: 15px solid rgba(255, 0, 0 ,0.5);
+    
     /* padding 4방향 */
     /* padding: 20px; */
 
-    padding-top: 50px;
-    padding-right: 40px;
-    padding-bottom: 30px;
-    padding-left: 20px;
+    padding-top: 50px; 
+    padding-right: 40px; 
+    padding-bottom: 30px; 
+    padding-left: 20px; 
 
     /* margin: 20px; */
     /* 
@@ -61,41 +60,41 @@ div.fourth img {
     border-radius: 50%;
 }
 
+div.talk {
+    width: 100px;
+    background-color: yellow;
+    border: 1px solid black;
+    padding: 10px;
+
+}
+
 div.talk.right {
-    width: 100px;
-    background-color: yellow;
-    border: 1px solid black;
-    padding: 10px;
     border-radius: 20px 0 20px 20px;
-    margin-left: 200px
+    margin-left: 200px;
 }
-
 div.talk.left {
-    width: 100px;
-    background-color: yellow;
-    border: 1px solid black;
-    padding: 10px;
     border-radius: 0 20px 20px 20px;
-    margin-right: 200px;
 }
 
-#p,
-#c1,
-#c2 {
+#p, #c1, #c2 {
     border: 1px solid red;
 }
-
-#c1,c2 {
+#p {
     margin-top: 20px;
+}
+#c1 {
+    margin: 20px;
+}
+#c2 {
+    margin: 20px;
 }
 
 div.box {
-    border: 1px solid blue;
+    border: 1px solid red;
     margin: 10px;
     padding: 50px;
     width: 50%;
 }
-
 div.box.border {
-    box-sizing: border-box
+    box-sizing: border-box;
 }

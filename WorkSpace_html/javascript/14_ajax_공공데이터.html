@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.addEventListener('load', function () {
+            document.querySelector('#btn').addEventListener('click', function () {
+                forecast();
+            });
+        });
+
+        function forecast() {
+            let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst";
+            url += "?serviceKey=GULV2rcSV8Xvpj6wChtGylssIp0O8SP4ZQ5PQZ1rekI4IqxcNVpaJJP7FpqTLoSoWpeNC/HlcI76RBgp4LS/8g==";
+            url += "&numOfRows=1000";
+            url += "&pageNo=1";
+            url += "&dataType=JSON";
+            url += "&base_date=20240619";
+            url += "&base_time=1130";
+            url += "&nx=63";
+            url += "&ny=110";
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.send();
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    let data = xhr.responseText;
+                    // console.log(data);
+
+                    let json = JSON.parse(data);
+                    console.log(json);
+
+                    let info_view = document.querySelector('#info_view');
+
+
+                    let item = jason.response.body.items.item;
+                    for (let i = 0; i < item.length; i++) {
+
+                        /*
+                        <tr>
+                            <td>RN1</td>
+                            <td>20240619</td>
+                            <td>1400</td>
+                            <td>강수없음</td>
+                         </tr>
+            
+                        */
+
+                        if (item[0].category == 'T1H') {
+                            console.log(item[0]);
+
+                            let html = `
+                                        <tr>
+                                            <td>${item[i].category}</td>
+                                            <td>${item[i].fcstDate}</td>
+                                            <td>${item[i].fcstTime}</td>
+                                            <td>${item[i].fcstValue}</td>
+                                        </tr>`;
+                            info_view.innerHTML += html;
+                        } else if (item[i].category == "T1H") {
+                            console.log(item[i]);
+                            let html = `
+                                        <tr>
+                                            <td>${item[i].category}</td>
+                                            <td>${item[i].fcstDate}</td>
+                                            <td>${item[i].fcstTime}</td>
+                                            <td>${item[i].fcstValue}</td>
+                                        </tr>`;
+                            info_view.innerHTML += html;
+                        }
+                    }
+                }
+                
+                item.filter(function (info) {
+                    // info.category == 'RN1' || info.category == 'REH'
+                    
+                    let result = false;
+                    if (info.category == 'RN1') {
+                        result = true;
+                    } else if (info.category == 'REH') {
+                        result = true;
+                    }
+                    
+                    return result;
+                })
+                console.log('filtered');
+                
+            }
+        }
+        </script>
+</head>
+
+<body>
+    <button type="button" id="btn">초단기예보조회</button>
+    <table>
+        <tbody id='info_view'>
+
+            <tr>
+                <td>RN1</td>
+                <td>20240619</td>
+                <td>1400</td>
+                <td>강수없음</td>
+            </tr>
+            <tr>
+                <td>RN1</td>
+                <td>20240619</td>
+                <td>1400</td>
+                <td>강수없음</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

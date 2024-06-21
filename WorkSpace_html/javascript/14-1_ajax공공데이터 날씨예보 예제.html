@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일기 예보</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #dddddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>실시간 일기 예보</h1>
+        <button type="button" id="btn">초단기예보 조회</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>카테고리</th>
+                    <th>날짜</th>
+                    <th>시간</th>
+                    <th>값</th>
+                </tr>
+            </thead>
+            <tbody id='info_view'>
+                <!-- 여기에 날씨 정보가 동적으로 표시될 것입니다 -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        window.addEventListener('load', function () {
+            document.querySelector('#btn').addEventListener('click', function () {
+                forecast();
+            });
+        });
+
+        function forecast() {
+            let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst";
+            const now = new Date();
+            const date = now.toISOString().slice(0, 10).replace(/-/g, "");
+            const base_time = getBaseTime();
+
+            url += "?serviceKey=GULV2rcSV8Xvpj6wChtGylssIp0O8SP4ZQ5PQZ1rekI4IqxcNVpaJJP7FpqTLoSoWpeNC/HlcI76RBgp4LS/8g==";
+            url += `&numOfRows=10&pageNo=1&dataType=JSON&base_date=${date}&base_time=${base_time}&nx=63&ny=110`;
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.send();
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    let data = xhr.responseText;
+                    let json = JSON.parse(data);
+                    displayWeather(json);
+                } else {
+                    console.error('Error:', xhr.status, xhr.statusText);
+                }
+            };
+        }
+
+        function displayWeather(data) {
+            const infoView = document.getElementById('info_view');
+            infoView.innerHTML = ''; // 기존 테이블 내용 초기화
+
+            if (data.response && data.response.body && data.response.body.items && data.response.body.items.item) {
+                const items = data.response.body.items.item;
+
+                items.forEach(item => {
+                    if (item.category === 'T1H' || item.category === 'RN1') {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${getCategoryName(item.category)}</td>
+                            <td>${item.fcstDate}</td>
+                            <td>${item.fcstTime}</td>
+                            <td>${item.fcstValue}${getUnit(item.category)}</td>
+                        `;
+                        infoView.appendChild(row);
+                    }
+                });
+
+            } else {
+                const errorRow = document.createElement('tr');
+                errorRow.innerHTML = `
+                    <td colspan="4">날씨 정보를 불러오는데 실패했습니다.</td>
+                `;
+                infoView.appendChild(errorRow);
+            }
+        }
+
+        function getBaseTime() {
+            const hours = String(new Date().getHours()).padStart(2, '0');
+            const minutes = String(new Date().getMinutes()).padStart(2, '0');
+            return hours + minutes;
+        }
+
+        function getCategoryName(category) {
+            const categoryNames = {
+                'T1H': '기온',
+                'RN1': '강수량'
+                // 추가적인 카테고리를 필요에 따라 여기에 추가할 수 있습니다.
+            };
+            return categoryNames[category] || category;
+        }
+
+        function getUnit(category) {
+            const units = {
+                'T1H': ' ℃',
+                'RN1': ' mm'
+                // 추가적인 카테고리에 맞게 단위를 설정할 수 있습니다.
+            };
+            return units[category] || '';
+        }
+    </script>
+</body>
+
+</html>
