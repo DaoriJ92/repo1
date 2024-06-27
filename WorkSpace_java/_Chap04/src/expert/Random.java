@@ -129,26 +129,38 @@ public class Random {
 //		} else {
 //			System.out.println(c3 + "은 2000과 3000의 사잇값이 아닙니다.");
 //		}
-		
-		//월(month)를 입력 받았을때 해당 월이 어떤 계절인지 출력
-		//3~5 = 봄
-		//6~8 = 여름
-		//9~11 = 가을
-		//12~2 = 겨울
-		
-		int m = scan.nextInt();
-		
-		if ( 3 <= m && m <= 5 ) {
-			System.out.println(m + "월은 봄 입니다.");
-		}else if( 6 <= m && m <=8 ){
-			System.out.println(m + "월은 여름 입니다.");
-		}else if( 9 <= m && m <=11 ){
-			System.out.println(m + "월은 가을 입니다.");
-		}else if( 12 == m || m <=2 ){
-			System.out.println(m + "월은 겨울 입니다.");
-		}else{
-			System.out.println("1월부터 12월까지만 입력 하세요.");
+
+		// 월(month)를 입력 받았을때 해당 월이 어떤 계절인지 출력
+		// 3~5 = 봄
+		// 6~8 = 여름
+		// 9~11 = 가을
+		// 12~2 = 겨울
+
+//		int m = scan.nextInt();
+//	
+//		
+//		if ( 3 <= m && m <= 5 ) {
+//			System.out.println(m + "월은 봄 입니다.");
+//		}else if( 6 <= m && m <=8 ){
+//			System.out.println(m + "월은 여름 입니다.");
+//		}else if( 9 <= m && m <=11 ){
+//			System.out.println(m + "월은 가을 입니다.");
+//		}else if( 12 == m || m <=2 ){
+//			System.out.println(m + "월은 겨울 입니다.");
+//		}else{
+//			System.out.println("1월부터 12월까지만 입력 하세요.");
+//			
+//		}
+//		scan.close();
+//		Scanner scan = new Scanner(System.in);
+
+// 온도를 입력 받아 해당 온도 + 영상 인지 영하인지 표시
+		int t = scan.nextInt();
+		if (t >= 0) {
+			System.out.println("기온은 영상 " + t + "도 입니다.");
+		} else {
+			System.out.println("기온은 영하 " + (-t) + "도 입니다.");
 		}
-		
-}
+
+	}
 }
