@@ -22,4 +22,16 @@ public class EmpService {
 		return insertCount;
 	}
 	
+	
+	// 전달 받은 EmpDTO를 
+	// DAO로 보내고,
+	// DAO가 return 한 EmpDTO를 반환한다.
+	public EmpDTO loginCheck(EmpDTO empDTO) {
+		EmpDAO empDAO = new EmpDAO();
+		EmpDTO resultDTO = empDAO.selectLogin(empDTO);
+		
+		
+		return resultDTO;
+	}
+	
 }

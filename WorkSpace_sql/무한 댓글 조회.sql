@@ -72,3 +72,5 @@ select count(*) from emp2;
 
 drop table emp2;
 commit;
+
+select * from emp2;

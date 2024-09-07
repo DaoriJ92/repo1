@@ -260,3 +260,9 @@ ORDER BY
         '*'
         )
     from emp;
+    
+    create table emp0
+    as select * from emp;
+    select * from emp0;
+    
+    SELECT * FROM equipment WHERE equiID = 'equi002';
