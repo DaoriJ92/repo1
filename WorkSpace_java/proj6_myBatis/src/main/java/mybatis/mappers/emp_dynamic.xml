@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.emp.dynamic">
+	<select id="selectEmpList2" resultType="emp.crud.EmpDTO"
+		parameterType="emp.crud.EmpDTO">
+		select
+		*
+		from
+		emp0
+		<!-- if가 거짓일때 where만 남으면 오류나니까 항상 참인 1 = 1을 적어놓기도 한다. where 1 = 1 <if test=" 
+			keyword != null amd keyword != '' "> and ename like '%' || #{keyword} || 
+			'%' </if> -->
+
+
+		<!-- <where> 는 태그안에 적힌 내용이 없으면 where 태그 자체를 지워줌 내용이 있으면 where문을 생성해줌 where 
+			바로 다음에 and 나 or는 자동으로 지워준다. -->
+		<where>
+			<if
+				test="type != null and type != '' and keyword != null and keyword != '' ">
+				<!-- <if test="type == 1"> -->
+				<!-- lower(ename) like '%' || lower(#{keyword}) || '%' -->
+				<!-- </if> -->
+				<!-- <if test="type == 2"> -->
+				<!-- lower(job) like '%' || lower(#{keyword}) || '%' -->
+				<!-- </if> -->
+				<choose>
+					<when test="type == 1">
+						lower(ename) like '%' || lower(#{keyword}) || '%'
+					</when>
+					<when test="type == 2">
+						lower(job) like '%' || lower(#{keyword}) || '%'
+					</when>
+					<when test="type == 3">
+						lower(ename) like '%' || lower(#{keyword}) || '%'
+						or
+						lower(job) like '%' || lower(#{keyword}) || '%'
+
+					</when>
+					<when test="type == 4">
+						and sal <![CDATA[<=]]>
+						#{keyword}
+					</when>
+				</choose>
+			</if>
+
+			<if test="cheks != null">
+				and empno in /*(1,2,3,4)*/
+				<!-- item : foreach 안에서 사용 할 변수 collection : 반복되는 것 dto나 map 안에 있으면 필드명이나 
+					key를 적어서 꺼내 옴 parameterType에 배열이 전달 되었다면 "array" list가 전달되었다면 "list"ZX -->
+				<foreach item="item" open="(" collection="checks"
+					separator="," close=")">
+					#{item}
+
+				</foreach>
+
+			</if>
+		</where>
+	</select>
+</mapper>
