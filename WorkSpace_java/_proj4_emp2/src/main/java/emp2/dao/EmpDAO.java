@@ -3,7 +3,6 @@ package emp2.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,148 +14,153 @@ import emp2.dto.EmpDTO;
 
 public class EmpDAO {
 
-    // 특정 사원(empno2)의 정보 또는 전체 사원 정보를 조회하는 메서드
-    public List<EmpDTO> selectEmp(String empno2) {
-        // 사원 정보를 담을 리스트를 생성
-        List<EmpDTO> list = new ArrayList<>();
+	public List selectEmp(String empno2) {
+		List list = new ArrayList();
+		
+		try {
+			// # DB에서 emp2 조회하기
+			
+			// ## DB 접속 시작
+			// JNDI 방식으로
+			// Servers 폴더의 context.xml 중 Resource 태그(노드)를 가져온다
+			// 거기에는 DB 정보가 있다
+			// 그걸로 DataSource만든다
+			// DataSource가 커넥션 풀이라고 생각하면 된다
+			Context ctx = new InitialContext();
+			DataSource dataSource = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+			
+			// 커넥션 풀에서 접속 정보를 가져오기
+			Connection con = dataSource.getConnection();
+			// ## DB 접속 끝
+			
 
-        try {
-            // # DB에서 emp2 조회하기
+			// SQL 준비
+			String query = null;
+			PreparedStatement ps = null;
+			
+			if(empno2 == null) {
+				query = " SELECT * FROM emp2";
+			} else if(empno2 != null) {
+				query = " SELECT * FROM emp2 where empno = ?";
+			}
+			ps = con.prepareStatement(query);
 
-            // ## DB 접속 시작
-            // JNDI (Java Naming and Directory Interface)를 통해 DataSource 객체를 얻음
-            Context ctx = new InitialContext();
-            DataSource dataSource = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+			if(empno2 != null) {
+				ps.setInt(1, Integer.parseInt(empno2));
+			}
+			
+			// SQL 실행 및 결과 확보
+			// 		executeQuery : select문 실행
+			//		ResultSet : select문 조회 결과 전체 : 엑셀처럼 테이블 느낌
+			ResultSet rs = ps.executeQuery();
+			
+			// 결과 활용
+			// 		한줄 한줄을 DTO에 넣기
+			//		그렇게 만들어진 DTO를 List에 넣기
+			
+			// rs.next() : 다음 줄로 커서를 이동한다
+			// 다음 줄이 있다면 true를, 없으면 false를 돌려줌
+			// 다음 줄이 있으면 rs는 다음줄 덩어리 : table의 tr 한줄, 1차원 배열
+			while( rs.next() ) {
+				EmpDTO empDTO = new EmpDTO();
+				
+				// 이번 줄에서 empno 컬럼의 값을 int로 형변환해서 가져옴
+				int empno = rs.getInt("empno");
+				empDTO.setEmpno(empno);
+				
+				String ename = rs.getString("ename");
+				empDTO.setEname(ename);
+				
+				empDTO.setJob( rs.getString("job") );
+				empDTO.setHireDate( rs.getDate("hiredate") );
+				
+				list.add(empDTO);
+			}
+			
+			ps.close();
+			con.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public int insertEmp(EmpDTO dto) {
+		int result = -1;
+		
+		// DB 접속
+		try {
+			Context ctx = new InitialContext();
+			DataSource dataSource = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+			Connection con = dataSource.getConnection();
 
-            // DataSource에서 커넥션을 가져옴
-            Connection con = dataSource.getConnection();
-            // ## DB 접속 끝
+			// SQL 준비
+			String query = " INSERT INTO emp2 (empno, ename, sal, deptno, hiredate)";
+			       query +=" VALUES (?, ?, ?, ?, sysdate)";
+//			PreparedStatement ps = con.prepareStatement(query);
+			// 원래 실행되는걸 LoggableStatement가 가로채서
+			PreparedStatement ps = new LoggableStatement(con, query);
+			ps.setInt(1, dto.getEmpno());
+			ps.setString(2, dto.getEname());
+			ps.setInt(3, dto.getSal());
+			ps.setInt(4, dto.getDeptno());
+			
+			// 실제 실행되는 sql을 출력해볼 수 있다
+			System.out.println( ( (LoggableStatement)ps ).getQueryString() );
+			
+			// SQL 실행
+			result = ps.executeUpdate();
+			
+			ps.close();
+			con.close();	// 커넥션풀에 접속정보 반환
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public EmpDTO selectLogin(EmpDTO empDTO) {
+		EmpDTO resultDTO = null;
+		try {
+			
+			// DB 접속
+			Context ctx = new InitialContext();
+			DataSource dataSource = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+			Connection con = dataSource.getConnection();
 
-            // SQL 쿼리 준비
-            String query;
-            PreparedStatement ps;
+			// SQL 준비
+			String query = " select * from emp3 ";
+				   query +=" where ename = ? and empno = ? ";
+				   
+//			PreparedStatement ps = con.prepareStatement(query);
+			PreparedStatement ps = new LoggableStatement(con, query);
+			ps.setString(1, empDTO.getEname());
+			ps.setInt(2, empDTO.getEmpno());
+			System.out.println( ( (LoggableStatement)ps ).getQueryString() );
 
-            // empno2가 null이면 전체 사원 조회, 그렇지 않으면 특정 사원 조회
-            if (empno2 == null) {
-                query = "SELECT * FROM emp2";
-            } else {
-                query = "SELECT * FROM emp2 WHERE empno = ?";
-            }
-            ps = con.prepareStatement(query);
-
-            // empno2가 null이 아닐 경우 쿼리의 파라미터 설정
-            if (empno2 != null) {
-                ps.setInt(1, Integer.parseInt(empno2));
-            }
-
-            // SQL 쿼리 실행 및 결과 확보
-            ResultSet rs = ps.executeQuery();
-
-            // 결과를 리스트에 추가
-            while (rs.next()) {
-                EmpDTO empDTO = new EmpDTO();
-                // 현재 행에서 사원 정보를 읽어 DTO에 설정
-                empDTO.setEmpno(rs.getInt("empno"));
-                empDTO.setEname(rs.getString("ename"));
-                empDTO.setJob(rs.getString("job"));
-                empDTO.setHireDate(rs.getDate("hiredate"));
-
-                // DTO를 리스트에 추가
-                list.add(empDTO);
-            }
-
-            // 리소스 정리
-            ps.close();
-            con.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // 사원 정보 리스트 반환
-        return list;
-    }
-
-    // 사원 정보를 데이터베이스에 삽입하는 메서드
-    public int insertEmp(EmpDTO dto) {
-        int result = -1;
-
-        try {
-            // DB 접속
-            Context ctx = new InitialContext();
-            DataSource dataSource = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
-            Connection con = dataSource.getConnection();
-
-            // SQL 쿼리 준비
-            String query = "INSERT INTO emp2 (empno, ename, sal, deptno, hiredate) VALUES (?, ?, ?, ?, sysdate)";
-            // LoggableStatement를 사용하여 실행되는 SQL 쿼리를 로그로 출력할 수 있음
-            PreparedStatement ps = new LoggableStatement(con, query);
-            ps.setInt(1, dto.getEmpno());
-            ps.setString(2, dto.getEname());
-            ps.setInt(3, dto.getSal());
-            ps.setInt(4, dto.getDeptno());
-
-            // SQL 쿼리 로그 출력
-            System.out.println(((LoggableStatement) ps).getQueryString());
-
-            // SQL 실행
-            result = ps.executeUpdate();
-
-            // 리소스 정리
-            ps.close();
-            con.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // 삽입 결과 반환 (성공 시 1, 실패 시 -1)
-        return result;
-    }
-
-    // 로그인 기능을 수행하는 메서드
-    public EmpDTO selectLogin(EmpDTO empDTO) {
-        EmpDTO resultDTO = null;
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        try {
-            // DB 접속
-            Context ctx = new InitialContext();
-            DataSource dataSource = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
-            con = dataSource.getConnection();
-
-            // SQL 쿼리 준비
-            String query = "SELECT * FROM emp3 WHERE ename = ? AND empno = ?";
-            ps = con.prepareStatement(query);
-            ps.setString(1, empDTO.getEname());
-            ps.setInt(2, empDTO.getEmpno());
-
-            // SQL 쿼리 실행 및 결과 확인
-            rs = ps.executeQuery();
-
-            // 결과를 DTO에 설정
-            if (rs.next()) {
-                resultDTO = new EmpDTO();
-                resultDTO.setEmpno(rs.getInt("empno"));
-                resultDTO.setEname(rs.getString("ename"));
-                resultDTO.setSal(rs.getInt("sal"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            // 리소스 정리
-            try {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
-                if (con != null) con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        // 로그인 결과 DTO 반환 (일치하는 사원 정보가 없으면 null 반환)
-        return resultDTO;
-    }
+			ResultSet rs = ps.executeQuery();
+			while( rs.next() ) {
+				resultDTO = new EmpDTO();
+				
+				resultDTO.setEmpno( rs.getInt("empno") );
+				resultDTO.setEname( rs.getString("ename") );
+				resultDTO.setSal( rs.getInt("sal") );
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return resultDTO;
+	}
+	
 }
